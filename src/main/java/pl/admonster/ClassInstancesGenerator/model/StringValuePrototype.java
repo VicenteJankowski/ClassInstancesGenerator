@@ -8,6 +8,8 @@ public class StringValuePrototype extends ValuePrototype {
         OnlyUpperCase, OnlyLowerCase, UpperAndLowerCase;
     }
 
+    private CaseSensitivity caseSensitivityOption = CaseSensitivity.OnlyLowerCase;
+
     private static enum DefaultLength {
         ;
         private static final int MIN = 3;
@@ -24,5 +26,13 @@ public class StringValuePrototype extends ValuePrototype {
         super(generationBase);
         this.length.setMin(minLength);
         this.length.setMax(maxLength);
+    }
+
+    public CaseSensitivity getCaseSensitivityOption() {
+        return caseSensitivityOption;
+    }
+
+    public void setCaseSensitivityOption(CaseSensitivity caseSensitivityOption) {
+        this.caseSensitivityOption = caseSensitivityOption;
     }
 }
