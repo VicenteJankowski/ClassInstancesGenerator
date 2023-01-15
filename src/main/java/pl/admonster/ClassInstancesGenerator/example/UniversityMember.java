@@ -26,6 +26,9 @@ abstract class UniversityMember {
 
     private String email;
 
+    public UniversityMember() {
+    }
+
     public void setFirstName(String firstName) throws InvalidParameterException{
         if(firstName.length() < 3)
             throw new InvalidParameterException("First name is too short");

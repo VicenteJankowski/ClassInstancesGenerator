@@ -13,7 +13,7 @@ public class Generator {
 
     private List<Object> generatedObjects = new ArrayList<>();
 
-    public final static void generate(final Class modelClass, int requestedCount) throws FileNotFoundException {
+    public final static void generate(final Class modelClass, int requestedCount) throws FileNotFoundException, IllegalAccessException {
 
         Object newModelClassInstance;
         try {
@@ -35,12 +35,14 @@ public class Generator {
 
         for (Field singleField : fieldsOfModelClass) {
             try {
+                singleField.setAccessible(true);
                 singleField.set(newModelClassInstance, generateRandomValueFor(singleField));
             } catch (IllegalAccessException e) {
                 throw new RuntimeException("Error during assignation of generated value for field " + singleField.getName() + ": " + e);
             }
             System.out.println("Nazwa odnalezionego pola to: "
                     + singleField.getName() + " : " + singleField.getGenericType().getTypeName() + " # " + singleField.toGenericString());
+            System.out.println("Wygenerowana wartość: " + singleField.get(newModelClassInstance));
         }
     }
 

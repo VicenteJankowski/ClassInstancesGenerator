@@ -3,6 +3,10 @@ package pl.admonster.ClassInstancesGenerator.example;
 
 public class Student extends UniversityMember {
 
+    public Student() {
+        super();
+    }
+
     public Student(String firstName, String lastName, int age, String email, String faculty) {
         super(firstName, lastName, age, email);
         setFaculty(faculty);

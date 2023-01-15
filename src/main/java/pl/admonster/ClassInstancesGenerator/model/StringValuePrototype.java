@@ -18,6 +18,7 @@ public class StringValuePrototype extends ValuePrototype {
 
     public StringValuePrototype(final Field generationBase) {
         super(generationBase);
+        this.length = new Range();
         this.length.setMin(DefaultLength.MIN);
         this.length.setMax(DefaultLength.MAX);
     }
