@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 
 public class IntegerValuePrototype extends ValuePrototype {
 
-    private static enum DefaultRange {
+    private enum DefaultRange {
         ;
         private static final int MIN = 0;
         private static final int MAX = 1000;
