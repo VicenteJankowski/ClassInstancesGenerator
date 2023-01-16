@@ -2,8 +2,6 @@ package pl.admonster.ClassInstancesGenerator.service;
 
 import pl.admonster.ClassInstancesGenerator.model.StringValuePrototype;
 
-import java.nio.charset.Charset;
-import java.nio.charset.spi.CharsetProvider;
 import java.util.*;
 
 public class RandomString {
@@ -21,12 +19,23 @@ public class RandomString {
 
         public Character getRandom() {
             int randomIndex = RandomInteger.getRandomInt(0, possibleChars.size() - 1);
-            Iterator<Character> possibleCharsIterator = possibleChars.iterator();
+            return iterateUntil(randomIndex, possibleChars.iterator());
+        }
 
+        public static Character getRandom(CharsProvider... desireCharset) {
+            List<Character> possibleChars = new ArrayList<>();
+            for (CharsProvider singleCharset : desireCharset)
+                possibleChars.addAll(singleCharset.possibleChars);
+
+            int randomIndex = RandomInteger.getRandomInt(0, possibleChars.size() - 1);
+            return iterateUntil(randomIndex, possibleChars.iterator());
+        }
+
+        private static Character iterateUntil(int randomIndex, Iterator<Character> iterator) {
             Character result = null;
-            for (int i = 0; i <= randomIndex; i++) {
-                result = possibleCharsIterator.next();
-            }
+            for (int i = 0; i <= randomIndex; i++)
+                result = iterator.next();
+
             return result;
         }
     }
