@@ -3,12 +3,16 @@ package pl.admonster.ClassInstancesGenerator.service;
 import pl.admonster.ClassInstancesGenerator.model.prototype.StringValuePrototype;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class RandomString {
 
     public enum CharsProvider {
         LatinLettersUppercase("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
-        LatinLettersLowercase(LatinLettersUppercase.possibleChars.toString().toLowerCase()),
+        LatinLettersLowercase(LatinLettersUppercase.possibleChars.stream()
+                                                                 .map(String::valueOf)
+                                                                 .map(String::toLowerCase)
+                                                                 .collect(Collectors.joining())),
         Digits("1234567890");
 
         private final Set<Character> possibleChars = new TreeSet<>();

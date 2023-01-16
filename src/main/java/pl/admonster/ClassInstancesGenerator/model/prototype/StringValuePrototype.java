@@ -11,11 +11,11 @@ import static pl.admonster.ClassInstancesGenerator.service.RandomString.CharsPro
 
 public class StringValuePrototype extends ValuePrototype {
 
-    private Set<CharsProvider> desireChars = EnumSet.of(LatinLettersUppercase, LatinLettersLowercase, Digits);
+    private Set<CharsProvider> desireChars = EnumSet.of(LatinLettersLowercase, LatinLettersUppercase, Digits);
     private enum DefaultLength {
         ;
-        private static final int MIN = 3;
-        private static final int MAX = 8;
+        private static final int MIN = 8;
+        private static final int MAX = 25;
     }
 
     public StringValuePrototype(final Field generationBase) {
