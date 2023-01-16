@@ -7,7 +7,8 @@ import java.util.*;
 public class RandomString {
 
     enum CharsProvider {
-        LatinLetters("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+        LatinLettersUppercase("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
+        LatinLettersLowercase(LatinLettersUppercase.possibleChars.toString().toLowerCase()),
         Digits("1234567890");
 
         private final Set<Character> possibleChars = new TreeSet<>();
@@ -41,12 +42,12 @@ public class RandomString {
     }
 
     public static String generate(StringValuePrototype prototype) {
-
-        int generatedValueLength = RandomInteger.getRandomInt(prototype.getLength().getMin(), prototype.getLength().getMax());
+        int generatedValueLength = RandomInteger.getRandomInt(prototype.getLength().getMin(),
+                                                              prototype.getLength().getMax());
 
         StringBuilder generatedValueBuilder = new StringBuilder();
         for (int i = 0 ; i < generatedValueLength; i++)
-            generatedValueBuilder.append(CharsProvider.LatinLetters.getRandom());
+            generatedValueBuilder.append(CharsProvider.LatinLettersUppercase.getRandom());
 
         return generatedValueBuilder.toString();
     }
