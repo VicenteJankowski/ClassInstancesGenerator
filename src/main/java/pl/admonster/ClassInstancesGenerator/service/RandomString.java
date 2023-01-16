@@ -24,6 +24,13 @@ public class RandomString {
         }
 
         public static Character getRandom(CharsProvider... desireCharset) {
+            Set<CharsProvider> desireCharsetProcessed = Set.of(desireCharset[0]);
+            for (int i = 1; i < desireCharset.length; i++)
+                desireCharsetProcessed.add(desireCharset[i]);
+            return CharsProvider.getRandom(desireCharsetProcessed);
+        }
+
+        public static Character getRandom(Set<CharsProvider> desireCharset) {
             List<Character> possibleChars = new ArrayList<>();
             for (CharsProvider singleCharset : desireCharset)
                 possibleChars.addAll(singleCharset.possibleChars);
@@ -51,7 +58,7 @@ public class RandomString {
 
         StringBuilder generatedValueBuilder = new StringBuilder();
         for (int i = 0 ; i < generatedValueLength; i++)
-            generatedValueBuilder.append(CharsProvider.LatinLettersUppercase.getRandom());
+            generatedValueBuilder.append(CharsProvider.getRandom(prototype.getDesireChars()));
 
         return generatedValueBuilder.toString();
     }
