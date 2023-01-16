@@ -1,4 +1,6 @@
-package pl.admonster.ClassInstancesGenerator.model;
+package pl.admonster.ClassInstancesGenerator.model.prototype;
+
+import pl.admonster.ClassInstancesGenerator.model.Range;
 
 import java.lang.reflect.Field;
 

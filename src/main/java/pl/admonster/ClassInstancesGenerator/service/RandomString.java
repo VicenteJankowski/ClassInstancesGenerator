@@ -1,6 +1,6 @@
 package pl.admonster.ClassInstancesGenerator.service;
 
-import pl.admonster.ClassInstancesGenerator.model.StringValuePrototype;
+import pl.admonster.ClassInstancesGenerator.model.prototype.StringValuePrototype;
 
 import java.util.*;
 

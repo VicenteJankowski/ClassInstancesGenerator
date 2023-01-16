@@ -1,7 +1,7 @@
 package pl.admonster.ClassInstancesGenerator.service;
 
-import pl.admonster.ClassInstancesGenerator.model.IntegerValuePrototype;
-import pl.admonster.ClassInstancesGenerator.model.StringValuePrototype;
+import pl.admonster.ClassInstancesGenerator.model.prototype.IntegerValuePrototype;
+import pl.admonster.ClassInstancesGenerator.model.prototype.StringValuePrototype;
 
 import java.io.FileNotFoundException;
 import java.lang.reflect.Field;

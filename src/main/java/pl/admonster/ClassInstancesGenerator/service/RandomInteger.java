@@ -1,6 +1,6 @@
 package pl.admonster.ClassInstancesGenerator.service;
 
-import pl.admonster.ClassInstancesGenerator.model.IntegerValuePrototype;
+import pl.admonster.ClassInstancesGenerator.model.prototype.IntegerValuePrototype;
 
 public class RandomInteger {
 
