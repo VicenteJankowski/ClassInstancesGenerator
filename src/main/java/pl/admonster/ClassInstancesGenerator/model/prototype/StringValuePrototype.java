@@ -1,18 +1,18 @@
 package pl.admonster.ClassInstancesGenerator.model.prototype;
 
 import pl.admonster.ClassInstancesGenerator.model.Range;
+import pl.admonster.ClassInstancesGenerator.service.RandomString.CharsProvider;
 
 import java.lang.reflect.Field;
+import java.util.EnumSet;
+import java.util.Set;
+
+import static pl.admonster.ClassInstancesGenerator.service.RandomString.CharsProvider.*;
 
 public class StringValuePrototype extends ValuePrototype {
 
-    public static enum CaseSensitivity {
-        OnlyUpperCase, OnlyLowerCase, UpperAndLowerCase;
-    }
-
-    private CaseSensitivity caseSensitivityOption = CaseSensitivity.OnlyLowerCase;
-
-    private static enum DefaultLength {
+    private Set<CharsProvider> desireChars = EnumSet.of(LatinLettersUppercase, LatinLettersLowercase, Digits);
+    private enum DefaultLength {
         ;
         private static final int MIN = 3;
         private static final int MAX = 8;
@@ -31,11 +31,11 @@ public class StringValuePrototype extends ValuePrototype {
         this.length.setMax(maxLength);
     }
 
-    public CaseSensitivity getCaseSensitivityOption() {
-        return caseSensitivityOption;
+    public Set<CharsProvider> getDesireChars() {
+        return desireChars;
     }
 
-    public void setCaseSensitivityOption(CaseSensitivity caseSensitivityOption) {
-        this.caseSensitivityOption = caseSensitivityOption;
+    public void setDesireChars(Set<CharsProvider> desireChars) {
+        this.desireChars = desireChars;
     }
 }

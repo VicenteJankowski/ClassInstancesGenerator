@@ -6,7 +6,7 @@ import java.util.*;
 
 public class RandomString {
 
-    enum CharsProvider {
+    public enum CharsProvider {
         LatinLettersUppercase("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
         LatinLettersLowercase(LatinLettersUppercase.possibleChars.toString().toLowerCase()),
         Digits("1234567890");
@@ -38,6 +38,10 @@ public class RandomString {
                 result = iterator.next();
 
             return result;
+        }
+
+        public Set<Character> getPossibleChars() {
+            return possibleChars;
         }
     }
 
