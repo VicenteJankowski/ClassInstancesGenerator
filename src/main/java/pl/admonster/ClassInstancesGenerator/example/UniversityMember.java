@@ -2,6 +2,8 @@ package pl.admonster.ClassInstancesGenerator.example;
 
 
 
+import pl.admonster.ClassInstancesGenerator.model.AutoGenerateValueFromTxtFile;
+
 import java.security.InvalidParameterException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,6 +20,7 @@ abstract class UniversityMember {
 
     private Long id;
 
+    @AutoGenerateValueFromTxtFile
     private String firstName;
 
     private String lastName;
