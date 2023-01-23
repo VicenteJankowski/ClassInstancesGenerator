@@ -31,7 +31,7 @@ public class Generator {
             superClassOfModel = superClassOfModel.getSuperclass();
         }
 
-        System.out.println("Siema, liczba pól klasy " + modelClass.getName() + " to " + fieldsOfModelClass.size());
+        System.out.println("Number of found class's fields " + modelClass.getName() + " to " + fieldsOfModelClass.size());
 
         for (Field singleField : fieldsOfModelClass) {
             try {
@@ -40,9 +40,9 @@ public class Generator {
             } catch (IllegalAccessException e) {
                 throw new RuntimeException("Error during assignation of generated value for field " + singleField.getName() + ": " + e);
             }
-            System.out.println("Nazwa odnalezionego pola to: "
+            System.out.println("Name of found field: "
                     + singleField.getName() + " : " + singleField.getGenericType().getTypeName() + " # " + singleField.toGenericString());
-            System.out.println("Wygenerowana wartość: " + singleField.get(newModelClassInstance));
+            System.out.println("Generated value: " + singleField.get(newModelClassInstance));
         }
     }
 
