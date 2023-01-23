@@ -7,18 +7,16 @@ import pl.admonster.ClassInstancesGenerator.model.prototype.StringValuePrototype
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Generator {
 
     private List<Object> generatedObjects = new ArrayList<>();
 
-    public final static void generate(final Class modelClass, int requestedCount) throws FileNotFoundException, IllegalAccessException {
+    public static void generate(final Class<?> modelClass, int requestedCount) throws FileNotFoundException, IllegalAccessException {
 
         Object newModelClassInstance;
         try {
@@ -27,10 +25,9 @@ public class Generator {
             throw new RuntimeException("Error during generation of new class instance: " + e);
         }
 
-        List<Field> fieldsOfModelClass = new ArrayList<>();
-        fieldsOfModelClass.addAll(List.of(modelClass.getDeclaredFields()));
+        List<Field> fieldsOfModelClass = new ArrayList<>(List.of(modelClass.getDeclaredFields()));
 
-        Class superClassOfModel = modelClass.getSuperclass();
+        Class<?> superClassOfModel = modelClass.getSuperclass();
         while (superClassOfModel != null) {
             fieldsOfModelClass.addAll(List.of(superClassOfModel.getDeclaredFields()));
             superClassOfModel = superClassOfModel.getSuperclass();
@@ -52,33 +49,47 @@ public class Generator {
     }
 
     private static Object generateRandomValueFor(final Field singleField) {
-        switch (singleField.getGenericType().getTypeName()) {
-            case "int":
-                IntegerValuePrototype integerValuePrototype = new IntegerValuePrototype(singleField);
-                return RandomInteger.getRandomInt(integerValuePrototype);
-            case "java.lang.String":
-                StringValuePrototype stringValuePrototype = new StringValuePrototype(singleField);
-                return RandomString.generate(stringValuePrototype);
+        if (singleField.isAnnotationPresent(AutoGenerateValueFromTxtFile.class)) {
+            String txtFilePath = "./src/main/resources/" + singleField.getName() + ".txt";
+            BufferedReader bufferedReader;
+
+            try {
+                bufferedReader = new BufferedReader(new FileReader(txtFilePath));
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException("Txt file not found for class " + singleField.getName());
+            }
+
+            List<String> possibleValues = bufferedReader.lines().toList();
+            int randomIndex = RandomInteger.getRandomInt(0, possibleValues.size() - 1);
+            String generatedValue = possibleValues.get(randomIndex);
+
+            if (generatedValue.isBlank())
+                System.out.println("Warning! Value obtained form txt file is empty. Correct the txt file, unless that is what you want to obtain.");
+
+            return generatedValue;
+
+        } else {
+            switch (singleField.getGenericType().getTypeName()) {
+                case "int" -> {
+                    IntegerValuePrototype integerValuePrototype = new IntegerValuePrototype(singleField);
+                    return RandomInteger.getRandomInt(integerValuePrototype);
+                }
+                case "java.lang.String" -> {
+                    StringValuePrototype stringValuePrototype = new StringValuePrototype(singleField);
+                    return RandomString.generate(stringValuePrototype);
+                }
+            }
         }
 
         return null;
     }
 
-    private static Object createNewInstanceOf(final Class modelClass) {
+    private static Object createNewInstanceOf(final Class<?> modelClass) {
         try {
             return modelClass.getDeclaredConstructor().newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static List<?> getPossibleValuesFor(final Field analyzedVar) {
-        return new ArrayList<Object>();
-    }
 }
