@@ -1,13 +1,18 @@
 package pl.admonster.ClassInstancesGenerator.service;
 
+import pl.admonster.ClassInstancesGenerator.model.AutoGenerateValueFromTxtFile;
 import pl.admonster.ClassInstancesGenerator.model.prototype.IntegerValuePrototype;
 import pl.admonster.ClassInstancesGenerator.model.prototype.StringValuePrototype;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Generator {
 
@@ -34,14 +39,14 @@ public class Generator {
         System.out.println("Number of found class's fields " + modelClass.getName() + " to " + fieldsOfModelClass.size());
 
         for (Field singleField : fieldsOfModelClass) {
+            System.out.println("Name of found field: "
+                    + singleField.getName() + " : " + singleField.getGenericType().getTypeName() + " # " + singleField.toGenericString());
             try {
                 singleField.setAccessible(true);
                 singleField.set(newModelClassInstance, generateRandomValueFor(singleField));
             } catch (IllegalAccessException e) {
                 throw new RuntimeException("Error during assignation of generated value for field " + singleField.getName() + ": " + e);
             }
-            System.out.println("Name of found field: "
-                    + singleField.getName() + " : " + singleField.getGenericType().getTypeName() + " # " + singleField.toGenericString());
             System.out.println("Generated value: " + singleField.get(newModelClassInstance));
         }
     }
