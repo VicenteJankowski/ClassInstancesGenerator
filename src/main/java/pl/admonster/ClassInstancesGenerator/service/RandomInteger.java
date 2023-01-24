@@ -4,12 +4,12 @@ import pl.admonster.ClassInstancesGenerator.model.prototype.IntegerValuePrototyp
 
 public class RandomInteger {
 
-    static int getRandomInt(int minRange, int maxRange) {
+    static int generate(int minRange, int maxRange) {
         return minRange + (int) Math.round(Math.random() * (maxRange - minRange));
     }
 
-    static int getRandomInt(IntegerValuePrototype prototype) {
-        return getRandomInt(prototype.getNumberBoundaries().getMin(), prototype.getNumberBoundaries().getMax());
+    static int generate(IntegerValuePrototype prototype) {
+        return generate(prototype.getNumberBoundaries().getMin(), prototype.getNumberBoundaries().getMax());
     }
 
 }

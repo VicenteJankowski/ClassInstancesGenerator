@@ -22,24 +22,24 @@ public class RandomString {
             }
         }
 
-        public Character getRandom() {
-            int randomIndex = RandomInteger.getRandomInt(0, possibleChars.size() - 1);
+        public Character generate() {
+            int randomIndex = RandomInteger.generate(0, possibleChars.size() - 1);
             return iterateUntil(randomIndex, possibleChars.iterator());
         }
 
-        public static Character getRandom(CharsProvider... desireCharset) {
+        public static Character generate(CharsProvider... desireCharset) {
             Set<CharsProvider> desireCharsetProcessed = Set.of(desireCharset[0]);
             for (int i = 1; i < desireCharset.length; i++)
                 desireCharsetProcessed.add(desireCharset[i]);
-            return CharsProvider.getRandom(desireCharsetProcessed);
+            return CharsProvider.generate(desireCharsetProcessed);
         }
 
-        public static Character getRandom(Set<CharsProvider> desireCharset) {
+        public static Character generate(Set<CharsProvider> desireCharset) {
             List<Character> possibleChars = new ArrayList<>();
             for (CharsProvider singleCharset : desireCharset)
                 possibleChars.addAll(singleCharset.possibleChars);
 
-            int randomIndex = RandomInteger.getRandomInt(0, possibleChars.size() - 1);
+            int randomIndex = RandomInteger.generate(0, possibleChars.size() - 1);
             return iterateUntil(randomIndex, possibleChars.iterator());
         }
 
@@ -57,12 +57,12 @@ public class RandomString {
     }
 
     public static String generate(StringValuePrototype prototype) {
-        int generatedValueLength = RandomInteger.getRandomInt(prototype.getLength().getMin(),
+        int generatedValueLength = RandomInteger.generate(prototype.getLength().getMin(),
                                                               prototype.getLength().getMax());
 
         StringBuilder generatedValueBuilder = new StringBuilder();
         for (int i = 0 ; i < generatedValueLength; i++)
-            generatedValueBuilder.append(CharsProvider.getRandom(prototype.getDesireChars()));
+            generatedValueBuilder.append(CharsProvider.generate(prototype.getDesireChars()));
 
         return generatedValueBuilder.toString();
     }
