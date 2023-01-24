@@ -66,7 +66,7 @@ public class Generator {
             if (generatedValue.isBlank())
                 System.out.println("Warning! Value obtained form txt file is empty. Correct the txt file, unless that is what you want to obtain.");
 
-            return generatedValue;
+            return generatedValue.trim();
 
         } else {
             switch (singleField.getGenericType().getTypeName()) {
