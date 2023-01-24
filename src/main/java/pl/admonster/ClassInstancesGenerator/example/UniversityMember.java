@@ -23,6 +23,7 @@ abstract class UniversityMember {
     @AutoGenerateValueFromTxtFile
     private String firstName;
 
+    @AutoGenerateValueFromTxtFile
     private String lastName;
 
     private int age;
