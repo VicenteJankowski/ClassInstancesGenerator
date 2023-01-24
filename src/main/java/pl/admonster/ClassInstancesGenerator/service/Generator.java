@@ -16,7 +16,7 @@ public class Generator {
 
     private List<Object> generatedObjects = new ArrayList<>();
 
-    public static void generate(final Class<?> modelClass, int requestedCount) throws FileNotFoundException, IllegalAccessException {
+    public static int generate(final Class<?> modelClass, int requestedCount) throws FileNotFoundException, IllegalAccessException {
 
         Object newModelClassInstance;
         try {
@@ -46,6 +46,8 @@ public class Generator {
             }
             System.out.println("Generated value: " + singleField.get(newModelClassInstance));
         }
+
+        return requestedCount > 1 ? generate(modelClass, requestedCount - 1) : 1;
     }
 
     private static Object generateRandomValueFor(final Field singleField) {
@@ -60,7 +62,7 @@ public class Generator {
             }
 
             List<String> possibleValues = bufferedReader.lines().toList();
-            int randomIndex = RandomInteger.getRandomInt(0, possibleValues.size() - 1);
+            int randomIndex = RandomInteger.generate(0, possibleValues.size() - 1);
             String generatedValue = possibleValues.get(randomIndex);
 
             if (generatedValue.isBlank())
@@ -72,7 +74,7 @@ public class Generator {
             switch (singleField.getGenericType().getTypeName()) {
                 case "int" -> {
                     IntegerValuePrototype integerValuePrototype = new IntegerValuePrototype(singleField);
-                    return RandomInteger.getRandomInt(integerValuePrototype);
+                    return RandomInteger.generate(integerValuePrototype);
                 }
                 case "java.lang.String" -> {
                     StringValuePrototype stringValuePrototype = new StringValuePrototype(singleField);

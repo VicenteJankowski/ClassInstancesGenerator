@@ -9,7 +9,7 @@ public class ClassInstancesGenerator {
     public static void main( String[] args ) {
 
         try {
-            Generator.generate(Student.class, 1);
+            Generator.generate(Student.class, 10);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IllegalAccessException e) {
