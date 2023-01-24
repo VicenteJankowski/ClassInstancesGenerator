@@ -1,4 +1,4 @@
-package pl.admonster.ClassInstancesGenerator.model;
+package pl.admonster.ClassInstancesGenerator.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

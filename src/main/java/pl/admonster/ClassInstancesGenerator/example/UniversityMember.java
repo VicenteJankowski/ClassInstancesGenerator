@@ -2,7 +2,7 @@ package pl.admonster.ClassInstancesGenerator.example;
 
 
 
-import pl.admonster.ClassInstancesGenerator.model.AutoGenerateValueFromTxtFile;
+import pl.admonster.ClassInstancesGenerator.annotation.AutoGenerateValueFromTxtFile;
 
 import java.security.InvalidParameterException;
 import java.util.regex.Matcher;

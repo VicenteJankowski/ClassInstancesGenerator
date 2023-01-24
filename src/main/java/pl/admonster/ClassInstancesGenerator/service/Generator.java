@@ -1,6 +1,6 @@
 package pl.admonster.ClassInstancesGenerator.service;
 
-import pl.admonster.ClassInstancesGenerator.model.AutoGenerateValueFromTxtFile;
+import pl.admonster.ClassInstancesGenerator.annotation.AutoGenerateValueFromTxtFile;
 import pl.admonster.ClassInstancesGenerator.model.prototype.IntegerValuePrototype;
 import pl.admonster.ClassInstancesGenerator.model.prototype.StringValuePrototype;
 
