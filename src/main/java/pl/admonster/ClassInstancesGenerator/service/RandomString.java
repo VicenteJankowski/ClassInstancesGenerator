@@ -23,7 +23,7 @@ public class RandomString {
         }
 
         public Character generate() {
-            int randomIndex = RandomInteger.generate(0, possibleChars.size() - 1);
+            int randomIndex = (int) RandomNumeric.generate(0, possibleChars.size() - 1);
             return iterateUntil(randomIndex, possibleChars.iterator());
         }
 
@@ -39,7 +39,7 @@ public class RandomString {
             for (CharsProvider singleCharset : desireCharset)
                 possibleChars.addAll(singleCharset.possibleChars);
 
-            int randomIndex = RandomInteger.generate(0, possibleChars.size() - 1);
+            int randomIndex = (int) RandomNumeric.generate(0, possibleChars.size() - 1);
             return iterateUntil(randomIndex, possibleChars.iterator());
         }
 
@@ -57,8 +57,8 @@ public class RandomString {
     }
 
     public static String generate(StringValuePrototype prototype) {
-        int generatedValueLength = RandomInteger.generate(prototype.getLength().getMin(),
-                                                              prototype.getLength().getMax());
+        int generatedValueLength = (int) RandomNumeric.generate(prototype.getRequestedLength().getMin(),
+                                                              prototype.getRequestedLength().getMax());
 
         StringBuilder generatedValueBuilder = new StringBuilder();
         for (int i = 0 ; i < generatedValueLength; i++)
