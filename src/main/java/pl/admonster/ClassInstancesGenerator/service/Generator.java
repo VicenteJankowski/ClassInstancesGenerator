@@ -17,7 +17,7 @@ public class Generator {
 
     private static List<Object> generatedObjects = new LinkedList<>();
 
-    public static int generate(final Class<?> modelClass, int requestedCount) throws FileNotFoundException, IllegalAccessException {
+    public static List<Object> generate(final Class<?> modelClass, int requestedCount) throws FileNotFoundException, IllegalAccessException {
 
         Object newModelClassInstance = createNewInstanceOf(modelClass);
         List<Field> fieldsOfModelClass = getFieldsOf(modelClass);
@@ -28,7 +28,7 @@ public class Generator {
 
         generatedObjects.add(newModelClassInstance);
 
-        return requestedCount > 1 ? generate(modelClass, requestedCount - 1) : 1;
+        return requestedCount > 1 ? generate(modelClass, requestedCount - 1) : generatedObjects;
     }
 
     private static List<Field> getFieldsOf(Class<?> modelClass) {
@@ -50,21 +50,21 @@ public class Generator {
                 + singleField.getName() + " : " + singleField.getGenericType().getTypeName() + " # " + singleField.toGenericString());
         try {
             singleField.setAccessible(true);
-            singleField.set(newModelClassInstance, getValueFromAdequateGenratorService(singleField));
+            singleField.set(newModelClassInstance, getValueFromAdequateGeneratorService(singleField));
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Error during assignation of generated value for field " + singleField.getName() + ": " + e);
         }
         System.out.println("Generated value: " + singleField.get(newModelClassInstance));
     }
 
-    private static Object getValueFromAdequateGenratorService(final Field singleField) {
+    private static Object getValueFromAdequateGeneratorService(final Field singleField) {
         if (singleField.isAnnotationPresent(AutoGenerateValueFromTxtFile.class)) {
             return generateRandomValueFromTxtFileFor(singleField);
         } else {
             switch (singleField.getGenericType().getTypeName()) {
                 case "int" -> {
-                    NumericValuePrototype numericValuePrototype = new NumericValuePrototype(singleField);
-                    return RandomNumeric.generate(numericValuePrototype);
+                    NumericValuePrototype numericValuePrototype = NumericValuePrototype.create(singleField);
+                    return (int) RandomNumeric.generate(numericValuePrototype);
                 }
                 case "java.lang.String" -> {
                     StringValuePrototype stringValuePrototype = new StringValuePrototype(singleField);
