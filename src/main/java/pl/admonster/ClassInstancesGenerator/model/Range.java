@@ -14,6 +14,10 @@ public class Range {
         this.maxValue = maxValue;
     }
 
+    public Range() {
+
+    }
+
     public float getMin() {
         return minValue;
     }
