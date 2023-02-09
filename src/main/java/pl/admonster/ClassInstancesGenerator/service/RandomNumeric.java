@@ -9,7 +9,7 @@ public class RandomNumeric {
     }
 
     static float generate(int minRange, int maxRange) {
-        return generate(minRange, maxRange);
+        return generate((float) minRange, (float) maxRange);
     }
 
     static float generate(NumericValuePrototype prototype) {
