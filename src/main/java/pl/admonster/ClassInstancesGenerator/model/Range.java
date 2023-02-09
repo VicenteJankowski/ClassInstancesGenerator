@@ -2,16 +2,19 @@ package pl.admonster.ClassInstancesGenerator.model;
 
 public class Range {
 
-    private int minValue;
-    private int maxValue;
+    private float minValue;
+    private float maxValue;
 
-    public Range() {}
+    public Range(float minValue, float maxValue) {
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+    }
     public Range(int minValue, int maxValue) {
         this.minValue = minValue;
         this.maxValue = maxValue;
     }
 
-    public int getMin() {
+    public float getMin() {
         return minValue;
     }
 
@@ -19,7 +22,7 @@ public class Range {
         this.minValue = minValue;
     }
 
-    public int getMax() {
+    public float getMax() {
         return maxValue;
     }
 
