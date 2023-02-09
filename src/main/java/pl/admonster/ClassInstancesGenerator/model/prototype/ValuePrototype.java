@@ -8,7 +8,7 @@ abstract class ValuePrototype{
 
     final Field generationBase;
 
-    Range length;
+    Range requestedLength;
 
     protected ValuePrototype(Field generationBase) {
         this.generationBase = generationBase;
@@ -18,11 +18,11 @@ abstract class ValuePrototype{
         return generationBase;
     }
 
-    public Range getLength() {
-        return length;
+    public Range getRequestedLength() {
+        return requestedLength;
     }
 
-    public void setLength(Range length) {
-        this.length = length;
+    public void setRequestedLength(Range requestedLength) {
+        this.requestedLength = requestedLength;
     }
 }

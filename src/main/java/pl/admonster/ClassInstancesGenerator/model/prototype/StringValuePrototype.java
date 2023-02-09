@@ -20,15 +20,15 @@ public class StringValuePrototype extends ValuePrototype {
 
     public StringValuePrototype(final Field generationBase) {
         super(generationBase);
-        this.length = new Range();
-        this.length.setMin(DefaultLength.MIN);
-        this.length.setMax(DefaultLength.MAX);
+        this.requestedLength = new Range();
+        this.requestedLength.setMin(DefaultLength.MIN);
+        this.requestedLength.setMax(DefaultLength.MAX);
     }
 
     public StringValuePrototype(final Field generationBase, final int minLength, final int maxLength) {
         super(generationBase);
-        this.length.setMin(minLength);
-        this.length.setMax(maxLength);
+        this.requestedLength.setMin(minLength);
+        this.requestedLength.setMax(maxLength);
     }
 
     public Set<CharsProvider> getDesireChars() {
