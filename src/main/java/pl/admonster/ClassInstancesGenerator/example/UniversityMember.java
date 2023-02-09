@@ -3,6 +3,7 @@ package pl.admonster.ClassInstancesGenerator.example;
 
 
 import pl.admonster.ClassInstancesGenerator.annotation.AutoGenerateValueFromTxtFile;
+import pl.admonster.ClassInstancesGenerator.annotation.RangeOfGeneratedValue;
 
 import java.security.InvalidParameterException;
 import java.util.regex.Matcher;
@@ -26,6 +27,7 @@ abstract class UniversityMember {
     @AutoGenerateValueFromTxtFile
     private String lastName;
 
+    @RangeOfGeneratedValue(min = 19, max = 31)
     private int age;
 
     private String email;
