@@ -4,7 +4,7 @@ import pl.admonster.ClassInstancesGenerator.model.Range;
 
 import java.lang.reflect.Field;
 
-public class IntegerValuePrototype extends ValuePrototype {
+public class NumericValuePrototype extends ValuePrototype {
 
     private enum DefaultRange {
         ;
@@ -14,7 +14,7 @@ public class IntegerValuePrototype extends ValuePrototype {
 
     Range numberBoundaries = new Range(DefaultRange.MIN, DefaultRange.MAX);
 
-    public IntegerValuePrototype(Field generationBase) {
+    public NumericValuePrototype(Field generationBase) {
         super(generationBase);
     }
 
